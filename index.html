@@ -3,42 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WebRTC Audio Call</title>
+  <title>WhatsApp-like WebRTC Audio Call</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 400px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #callBtn, #answerBtn {
+      background-color: #4caf50;
+      color: #fff;
+    }
+    #endCallBtn {
+      background-color: #f44336;
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
-  <h1>WebRTC Audio Call</h1>
+  <div class="container">
+    <h1>WhatsApp-like WebRTC Audio Call</h1>
   
-  <button id="callBtn">Call</button>
-  <button id="answerBtn">Answer</button>
-  <button id="endCallBtn">End Call</button>
+    <button id="callBtn">Call</button>
+    <button id="answerBtn">Answer</button>
+    <button id="endCallBtn">End Call</button>
   
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const socket = io();
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
 
-    document.getElementById('callBtn').addEventListener('click', () => {
-      socket.emit('call');
-    });
+      document.getElementById('callBtn').addEventListener('click', () => {
+        socket.emit('call');
+      });
 
-    document.getElementById('answerBtn').addEventListener('click', () => {
-      socket.emit('answer');
-    });
+      document.getElementById('answerBtn').addEventListener('click', () => {
+        socket.emit('answer');
+      });
 
-    document.getElementById('endCallBtn').addEventListener('click', () => {
-      socket.emit('endCall');
-    });
+      document.getElementById('endCallBtn').addEventListener('click', () => {
+        socket.emit('endCall');
+      });
 
-    socket.on('incomingCall', () => {
-      alert('Incoming call!');
-    });
+      socket.on('incomingCall', () => {
+        alert('Incoming call!');
+      });
 
-    socket.on('startCall', () => {
-      alert('Call started!');
-    });
+      socket.on('startCall', () => {
+        alert('Call started!');
+      });
 
-    socket.on('callEnded', () => {
-      alert('Call ended!');
-    });
-  </script>
+      socket.on('callEnded', () => {
+        alert('Call ended!');
+      });
+    </script>
+  </div>
 </body>
 </html>
